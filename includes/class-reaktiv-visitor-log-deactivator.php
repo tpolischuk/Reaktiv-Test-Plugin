@@ -32,6 +32,7 @@ class Reaktiv_Visitor_Log_Deactivator {
 	public static function deactivate() {
 		$page = get_page_by_path( 'visit' );
 		wp_delete_post($page->ID);
+    unregister_post_type( 'Visitor Log' );
 	}
 
 }

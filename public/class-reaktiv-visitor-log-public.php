@@ -111,19 +111,18 @@ class Reaktiv_Visitor_Log_Public {
 		 * We can do our normal processing here
 		 */
 
-		 print('hello');
 		 var_dump($_GET);
-		 exit;
+
+		 // exit;
+
+		 $id = wp_insert_post(array(
+			  'post_title'=> $_GET['guest'] . ' '. $_GET['email'],
+			  'post_type'=> 'visitor_log',
+			  'post_content'=>'Is visiting ' . $_GET['host']
+			));
+
+		 wp_redirect( home_url('/visit/') );
 
 	}
-
-	/**
-	 * Render the visitor log page
-	 *
-	 * @since  1.0.0
-	 */
-	// public function display_visitor_log_form() {
-	// 	include_once 'partials/reaktiv-visitor-log-public-display.php';
-	// }
 
 }

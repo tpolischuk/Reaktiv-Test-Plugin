@@ -39,7 +39,7 @@ class Reaktiv_Visitor_Log_Activator {
 
 		<input type="text" placeholder="Your E-mail" name="email" />
 
-		<select>
+		<select name="host">
 
 		<option value="Bob">Bob</option>
 		<option value="Susan">Susan</option>

@@ -100,4 +100,22 @@ class Reaktiv_Visitor_Log_Admin {
 
 	}
 
+	/**
+	 * Register Visitor Log custom post type.
+	 *
+	 * @since    1.0.0
+	 */
+	public function visitor_log_custom_post_type() {
+		register_post_type('visitor_log',
+									 array(
+											 'labels'      => array(
+													 'name'          => __('Visitor Log'),
+													 'singular_name' => __('Visitor Log'),
+											 ),
+											 'public'      => true,
+											 'has_archive' => true,
+									 )
+		);
+	}
+
 }
