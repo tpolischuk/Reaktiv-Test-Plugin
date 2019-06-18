@@ -30,17 +30,37 @@ class Reaktiv_Visitor_Log_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		// Create post object
-    $my_post = array(
+
+		$form = '<h3>Visitor Registration Form</h3>
+
+		<form id="login-form" action="' . esc_url( admin_url('admin-post.php') ) .'">
+
+		<input type="text" placeholder="Your Name" name="guest" />
+
+		<input type="text" placeholder="Your E-mail" name="email" />
+
+		<select>
+
+		<option value="Bob">Bob</option>
+		<option value="Susan">Susan</option>
+		<option value="Josephine">Josephine</option>
+
+		</select>
+
+		<input type="hidden" name="action" value="visitor_login_form">
+		<input type="submit" value="Submit" />
+
+		</form>';
+
+    $generated_visitor_page = array(
       'post_title'    => wp_strip_all_tags( 'Visit' ),
-      'post_content'  => 'Put the user signup form here',
+      'post_content'  => $form,
       'post_status'   => 'publish',
       'post_author'   => 1,
       'post_type'     => 'page',
     );
 
-    // Insert the post into the database
-    wp_insert_post( $my_post );
+    wp_insert_post( $generated_visitor_page );
 	}
 
 }

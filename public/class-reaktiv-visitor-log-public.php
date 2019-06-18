@@ -99,5 +99,22 @@ class Reaktiv_Visitor_Log_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/reaktiv-visitor-log-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+	/**
+	 * Create the page for the visitor form
+	 *
+	 * @since    1.0.0
+	 */
+	public function generate_visitor_page() {
+		// TODO add hook
+	}
+
+	/**
+	 * Render the visitor log page
+	 *
+	 * @since  1.0.0
+	 */
+	public function display_visitor_log_form() {
+		include_once 'partials/reaktiv-visitor-log-public-display.php';
+	}
 
 }
