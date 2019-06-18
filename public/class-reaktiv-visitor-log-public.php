@@ -100,12 +100,21 @@ class Reaktiv_Visitor_Log_Public {
 
 	}
 	/**
-	 * Create the page for the visitor form
+	 * Process the visitor form
 	 *
 	 * @since    1.0.0
 	 */
-	public function generate_visitor_page() {
-		// TODO add hook
+	public function process_visitor_login_form() {
+		/**
+		 * At this point, $_GET/$_POST variable are available
+		 *
+		 * We can do our normal processing here
+		 */
+
+		 print('hello');
+		 var_dump($_GET);
+		 exit;
+
 	}
 
 	/**
@@ -113,8 +122,8 @@ class Reaktiv_Visitor_Log_Public {
 	 *
 	 * @since  1.0.0
 	 */
-	public function display_visitor_log_form() {
-		include_once 'partials/reaktiv-visitor-log-public-display.php';
-	}
+	// public function display_visitor_log_form() {
+	// 	include_once 'partials/reaktiv-visitor-log-public-display.php';
+	// }
 
 }

@@ -173,6 +173,10 @@ class Reaktiv_Visitor_Log {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// This needs to be a different hook
+		$this->loader->add_action( 'admin_post_nopriv_visitor_login_form', $plugin_public, 'process_visitor_login_form' );
+		$this->loader->add_action( 'admin_post_visitor_login_form', $plugin_public, 'process_visitor_login_form' );
+
 	}
 
 	/**
