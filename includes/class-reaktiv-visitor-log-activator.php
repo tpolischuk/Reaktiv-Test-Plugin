@@ -40,23 +40,23 @@ class Reaktiv_Visitor_Log_Activator {
 		$employee_data = json_decode($result);
 
 		foreach ($employee_data as $employee) {
-			$visitable_employees .= '<option value="' . $employee->name. '">'. $employee->name . '</option>';
+			$visitable_employees .= '<option value="' . $employee->name .' - '. $employee->desk . '">'. $employee->name . '</option>';
 		}
 
-		$form = '<h3>Visitor Registration Form</h3>
+		$form = '<div class="form-container">
 		<form id="login-form" action="' . esc_url( admin_url('admin-post.php') ) .'">
-
+			<h3>Visitor Registration Form</h3>
 			<input type="text" required placeholder="Your Name" name="guest" />
 
-			<input type="text" required placeholder="Your E-mail" name="email" />
+			<input type="email" required placeholder="Your E-mail" name="email" />
 
 			<select required name="host">
 				' . $visitable_employees . '
 			</select>
 
 			<input type="hidden" name="action" value="visitor_login_form">
-			<input type="submit" value="Submit" />
-		</form>';
+			<input id="visitor-submit" type="submit" value="Submit" />
+		</form></div>';
 
     $generated_visitor_page = array(
       'post_title'    => wp_strip_all_tags( 'Visit' ),

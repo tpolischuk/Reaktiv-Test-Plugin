@@ -3,6 +3,42 @@
  * included in this file.
  */
 
+ /* Lot's of !importants to avoid themes from overriding the default styling */
+
+.form-container {
+  background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+  box-shadow: 6px 4px 5px 2px rgba(230,230,230,1);
+  width:600px;
+  display:block;
+  border-radius:20px;
+}
  #login-form {
-   background: red !important;
+   width: 500px;
+   margin: 0 auto;
+   padding: 40px;
  }
+
+ #login-form h3 {
+   color:white !important;
+   font-size:30px !important;
+   text-transform: capitalize !important;
+ }
+
+#login-form input,
+#login-form select {
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 4px;
+  font-family: "Droid Sans", "Helvetica Neue", sans-serif !important!
+  font-weight: 400 !important;
+  line-height: 1.8 !important;
+  text-rendering: optimizeLegibility !important;
+  padding: 0.36rem 0.66rem !important;
+}
+
+#login-form input#submit {
+    color: #fff !important;
+    font-family: "Droid Sans", "Helvetica Neue", sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 0.88889em !important;
+}
