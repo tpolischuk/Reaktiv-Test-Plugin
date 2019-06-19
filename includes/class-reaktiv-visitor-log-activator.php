@@ -35,11 +35,11 @@ class Reaktiv_Visitor_Log_Activator {
 
 		<form id="login-form" action="' . esc_url( admin_url('admin-post.php') ) .'">
 
-		<input type="text" placeholder="Your Name" name="guest" />
+		<input type="text" required placeholder="Your Name" name="guest" />
 
-		<input type="text" placeholder="Your E-mail" name="email" />
+		<input type="text" required placeholder="Your E-mail" name="email" />
 
-		<select name="host">
+		<select required name="host">
 
 		<option value="Bob">Bob</option>
 		<option value="Susan">Susan</option>
