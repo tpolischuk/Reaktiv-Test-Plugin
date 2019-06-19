@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired during plugin activation
  *
@@ -9,7 +8,6 @@
  * @package    Reaktiv_Visitor_Log
  * @subpackage Reaktiv_Visitor_Log/includes
  */
-
 /**
  * Fired during plugin activation.
  *
@@ -21,7 +19,6 @@
  * @author     Trevor Polischuk <trevorpolischuk@gmail.com>
  */
 class Reaktiv_Visitor_Log_Activator {
-
 	/**
 	 * Short Description. (use period)
 	 *
@@ -31,25 +28,34 @@ class Reaktiv_Visitor_Log_Activator {
 	 */
 	public static function activate() {
 
-		$form = '<h3>Visitor Registration Form</h3>
+		$employee_url = "https://gist.githubusercontent.com/jjeaton/21f04d41287119926eb4/raw/4121417bda0860f662d471d1d22b934a0af56eca/coworkers.json";
 
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_URL, $employee_url);
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		$employee_data = json_decode($result);
+
+		foreach ($employee_data as $employee) {
+			$visitable_employees .= '<option value="' . $employee->name. '">'. $employee->name . '</option>';
+		}
+
+		$form = '<h3>Visitor Registration Form</h3>
 		<form id="login-form" action="' . esc_url( admin_url('admin-post.php') ) .'">
 
-		<input type="text" required placeholder="Your Name" name="guest" />
+			<input type="text" required placeholder="Your Name" name="guest" />
 
-		<input type="text" required placeholder="Your E-mail" name="email" />
+			<input type="text" required placeholder="Your E-mail" name="email" />
 
-		<select required name="host">
+			<select required name="host">
+				' . $visitable_employees . '
+			</select>
 
-		<option value="Bob">Bob</option>
-		<option value="Susan">Susan</option>
-		<option value="Josephine">Josephine</option>
-
-		</select>
-
-		<input type="hidden" name="action" value="visitor_login_form">
-		<input type="submit" value="Submit" />
-
+			<input type="hidden" name="action" value="visitor_login_form">
+			<input type="submit" value="Submit" />
 		</form>';
 
     $generated_visitor_page = array(

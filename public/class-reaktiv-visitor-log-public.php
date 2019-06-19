@@ -109,7 +109,7 @@ class Reaktiv_Visitor_Log_Public {
 		// Query the custom post type to see if there is a record for the person
 		$loop = new WP_Query( array(
 			'post_type' => 'visitor_log',
-			's' => htmlspecialchars($_GET['guest'])
+			's' => sanitize_text_field($_GET['guest'])
 		));
 
 		while ( $loop->have_posts() ) : $loop->the_post();
@@ -123,11 +123,10 @@ class Reaktiv_Visitor_Log_Public {
 		}
 		endwhile;
 
-
 		$id = wp_insert_post(array(
-			'post_title'=> htmlspecialchars($_GET['guest']),
+			'post_title'=> sanitize_text_field($_GET['guest']),
 			'post_type'=> 'visitor_log',
-			'post_content'=>'Is visiting ' . htmlspecialchars($_GET['host'])
+			'post_content'=>'Is visiting ' . sanitize_text_field($_GET['host'])
 		));
 
 
