@@ -31,6 +31,6 @@ The employee list is automatically generated from a remote JSON file.
 
 Upon a successful visit, an entry is maid in a custom post type called 'Visitor Log'.
 
-## Screenshots
+## Screenshot
 
 ![Visitor Registration Form](https://i.imgur.com/bCxyfzc.png)

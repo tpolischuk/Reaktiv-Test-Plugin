@@ -112,6 +112,7 @@ class Reaktiv_Visitor_Log_Public {
 			's' => sanitize_text_field($_GET['guest'])
 		));
 
+		// Check if this persons name has been created in the past day
 		while ( $loop->have_posts() ) : $loop->the_post();
 		if (get_the_title() == $_GET['guest']) {
 			if (current_time('l F j Y') == get_the_date('l F j Y')) {
@@ -124,6 +125,7 @@ class Reaktiv_Visitor_Log_Public {
 		}
 		endwhile;
 
+		// Create entry in the custom post type
 		$id = wp_insert_post(array(
 			'post_title'=> sanitize_text_field($_GET['guest']),
 			'post_type'=> 'visitor_log',

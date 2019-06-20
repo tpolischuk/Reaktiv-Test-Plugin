@@ -20,9 +20,10 @@
  */
 class Reaktiv_Visitor_Log_Activator {
 	/**
-	 * Short Description. (use period)
+	 * Visitor Log Form setup. (use period)
 	 *
-	 * Long Description.
+	 * This function downloads the remote JSON file to populate the employee dropdown.
+	 * Then, it creates a form, and creates the /visit/ page.
 	 *
 	 * @since    1.0.0
 	 */

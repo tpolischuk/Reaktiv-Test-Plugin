@@ -23,9 +23,9 @@
 class Reaktiv_Visitor_Log_Deactivator {
 
 	/**
-	 * Short Description. (use period)
+	 * Removes Visitor Log functionality. (use period)
 	 *
-	 * Long Description.
+	 * Deletes the /visit/ page and unregisters the custom post type.
 	 *
 	 * @since    1.0.0
 	 */
