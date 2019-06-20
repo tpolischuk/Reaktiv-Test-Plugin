@@ -1,11 +1,10 @@
 
 # Visitor Login Plugin
-Donate link: http://www.trevorpolischuk.com
-Requires at least: 5.0
-Tested up to: 5.3
-Stable tag: 5.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+- Requires at least: 5.0
+- Tested up to: 5.3
+- Stable tag: 5.3
+- License: GPLv2 or later
+- License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 This plugin is a simulated visitor registration form created as a test project
 for Reaktiv Studios.
