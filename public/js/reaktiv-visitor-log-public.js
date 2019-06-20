@@ -29,4 +29,13 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+	 $(function() {
+		 if ($('#visitor-login-form').length) {
+			 var urlParams = new URLSearchParams(window.location.search);
+			 if (urlParams.get('success') == 'yes') {
+				 $('#visitor-login-form').prepend('<span class="visitor-login-success">Thank you. Enjoy your stay!</span>')
+			 }
+		 }
+	 });
+
 })( jQuery );

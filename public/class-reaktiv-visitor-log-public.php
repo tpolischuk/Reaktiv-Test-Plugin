@@ -114,11 +114,12 @@ class Reaktiv_Visitor_Log_Public {
 
 		while ( $loop->have_posts() ) : $loop->the_post();
 		if (get_the_title() == $_GET['guest']) {
-			if (time() - get_post_time() < 84000) {
-				wp_die('Only one visit allowed every 24 hours.', 'Error', array(
+			if (current_time('l F j Y') == get_the_date('l F j Y')) {
+				wp_die('Only one visit allowed per day', 'Error', array(
 					'response' 	=> 403,
 					'back_link' => '/visit/',
 				));
+				return;
 			}
 		}
 		endwhile;
@@ -129,11 +130,10 @@ class Reaktiv_Visitor_Log_Public {
 			'post_content'=>'Is visiting ' . sanitize_text_field($_GET['host'])
 		));
 
-
 		wp_reset_postdata();
 
-		wp_redirect( home_url('/visit/') );
+		wp_redirect( home_url('/visit?success=yes') );
 
-}
+	}
 
 }
