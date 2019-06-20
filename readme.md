@@ -1,5 +1,5 @@
 
-#Visitor Login Plugin
+# Visitor Login Plugin
 Donate link: http://www.trevorpolischuk.com
 Requires at least: 5.0
 Tested up to: 5.3
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 This plugin is a simulated visitor registration form created as a test project
 for Reaktiv Studios.
 
-##Installation
+## Installation
 
 Clone the entire contents of the repository into a directory called 'reaktiv-visitor-log':
 
@@ -22,7 +22,7 @@ Move the plugin into your plugins directory.
 
 Activate the plugin from the WordPress dashboard.
 
-##Usage
+## Usage
 
 On activation, the plugin will create a page in the database located at /visit/.
 
@@ -32,6 +32,6 @@ The employee list is automatically generated from a remote JSON file.
 
 Upon a successful visit, an entry is maid in a custom post type called 'Visitor Log'.
 
-##Screenshots
+## Screenshots
 
 ![Visitor Registration Form](https://i.imgur.com/bCxyfzc.png)
