@@ -1,9 +1,9 @@
 /**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+* All of the CSS for your public-facing functionality should be
+* included in this file.
+*/
 
- /* Lot's of !importants to avoid themes from overriding the default styling */
+/* Lot's of !importants to avoid themes from overriding the default styling */
 
 .form-container {
   background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
@@ -12,17 +12,17 @@
   display:block;
   border-radius:20px;
 }
- #visitor-login-form {
-   width: 500px;
-   margin: 0 auto;
-   padding: 40px;
- }
+#visitor-login-form {
+  width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+}
 
- #visitor-login-form h3 {
-   color:white !important;
-   font-size:30px !important;
-   text-transform: capitalize !important;
- }
+#visitor-login-form h3 {
+  color:white !important;
+  font-size:30px !important;
+  text-transform: capitalize !important;
+}
 
 #visitor-login-form input,
 #visitor-login-form select {
@@ -36,11 +36,18 @@
   padding: 0.36rem 0.66rem !important;
 }
 
-#visitor-login-form input#submit {
-    color: #fff !important;
-    font-family: "Droid Sans", "Helvetica Neue", sans-serif !important;
-    font-weight: 400 !important;
-    font-size: 0.88889em !important;
+#visitor-login-form input#visitor-submit {
+  color: #fff !important;
+  font-family: "Droid Sans", "Helvetica Neue", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.88889em !important;
+  background-color: #111 !important;
+  border: 0 !important;
+  background-image: none !important;
+}
+
+#visitor-login-form input#visitor-submit:hover {
+  background-color: #171b1e !important;
 }
 
 span.visitor-login-success {

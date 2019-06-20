@@ -1,22 +1,38 @@
-Task:
 
-Create a WordPress plugin that handles visitor check-in for an office. Our office has recently tightened its security measures and we need to maintain a log of each visitor on an internal website.
+=== Plugin Name ===
+Donate link: http://www.trevorpolischuk.com
+Tags: comments, spam
+Requires at least: 3.0.1
+Tested up to: 3.4
+Stable tag: 4.3
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Requirements:
+This plugin is a simulated visitor registration form created as a test project
+for Reaktiv Studios.
 
-A front-end page (/visit/) with a form that collects the visitor's name, email, and the name of the person they are visiting. Only valid email addresses are accepted.
-The names of workers in the office are available via JSON here: https://gist.githubusercontent.com/jjeaton/21f04d41287119926eb4/raw/4121417bda0860f662d471d1d22b934a0af56eca/coworkers.json. Your plugin should retrieve this list once and store it. It does not need to periodically check it for updates. This list of names should be selectable and only a name from this list can be entered.
-A visitor may not check in twice in the same day.
-A successful registration should create a new post in a "Visitor Log" post type which logs the submitted form, the date/time, and which desk they'll be visiting.
-After the successful submission, the visitor should be given positive confirmation, and then reset, ready for the next visitor.
-If the submission was unsuccessful, display an error message indicating the issue.
-An administrator can view the list of visitor log entries somewhere in the backend of the site.
-No login is required to submit the visitor form.
-It should be possible for other plugins to listen for when a new addition to the log has been made.
+== Installation ==
 
-Additional Requirements:
+Clone the entire contents of the repository into a directory called 'reaktiv-visitor-log':
 
-Your code must conform to the WordPress coding standards.
-Your code must be secure and keeping performance in mind.
-Your code should be 100% custom, no third party plugins allowed. If there’s something you think would be useful, please ask.
+`git clone git@github.com:tpolischuk/Reaktiv-Test-Plugin.git reaktiv-visitor-log`
 
+Move the plugin into your plugins directory.
+
+`mv reaktiv-visitor-log path/to/your/wp-content/plugins`
+
+Activate the plugin from the WordPress dashboard.
+
+== Usage ==
+
+On activation, the plugin will create a page in the database located at /visit/.
+
+The form allows for 1 visit per person per day. A valid e-mail address must be supplied.
+
+The employee list is automatically generated from a remote JSON file.
+
+Upon a successful visit, an entry is maid in a custom post type called 'Visitor Log'.
+
+== Screenshots ==
+
+![Visitor Registration Form](https://imgur.com/bCxyfzc)
