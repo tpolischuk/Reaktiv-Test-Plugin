@@ -125,12 +125,14 @@ class Reaktiv_Visitor_Log_Public {
 		}
 		endwhile;
 
+		$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
+
 		// Create entry in the custom post type
 		$id = wp_insert_post(array(
 			'post_title'=> sanitize_text_field($_GET['guest']),
 			'post_type'=> 'visitor_log',
 			'post_status' => 'publish',
-			'post_content'=>'Is visiting ' . sanitize_text_field($_GET['host'])
+			'post_content'=> $visitor_log_message
 		));
 
 		wp_reset_postdata();
