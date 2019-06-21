@@ -29,7 +29,7 @@ The form allows for 1 visit per person per day. A valid e-mail address must be s
 
 The employee list is automatically generated from a remote JSON file.
 
-Upon a successful visit, an entry is maid in a custom post type called 'Visitor Log'.
+Upon a successful visit, an entry is made in a custom post type called 'Visitor Log'.
 
 ## Screenshot
 
