@@ -40,6 +40,8 @@ class Reaktiv_Visitor_Log_Activator {
 
 		$employee_data = json_decode($result);
 
+		$visitable_employees = '';
+
 		foreach ($employee_data as $employee) {
 			$visitable_employees .= '<option value="' . $employee->name .' - '. $employee->desk . '">'. $employee->name .' - '. $employee->desk . '</option>';
 		}
