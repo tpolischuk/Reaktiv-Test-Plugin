@@ -129,6 +129,7 @@ class Reaktiv_Visitor_Log_Public {
 		$id = wp_insert_post(array(
 			'post_title'=> sanitize_text_field($_GET['guest']),
 			'post_type'=> 'visitor_log',
+			'post_status' => 'publish',
 			'post_content'=>'Is visiting ' . sanitize_text_field($_GET['host'])
 		));
 
