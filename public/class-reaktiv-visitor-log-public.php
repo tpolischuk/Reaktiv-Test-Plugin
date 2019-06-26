@@ -113,17 +113,19 @@ class Reaktiv_Visitor_Log_Public {
 		));
 
 		// Check if this persons name has been created in the past day
-		while ( $loop->have_posts() ) : $loop->the_post();
-		if (get_the_title() == $_GET['guest']) {
-			if (current_time('l F j Y') == get_the_date('l F j Y')) {
-				wp_die('Only one visit allowed per day', 'Error', array(
-					'response' 	=> 403,
-					'back_link' => '/visit/',
-				));
-				return;
+		if(isset($_GET['guest'])) {
+			while ( $loop->have_posts() ) : $loop->the_post();
+			if (get_the_title() === $_GET['guest']) {
+				if (current_time('l F j Y') === get_the_date('l F j Y')) {
+					wp_die('Only one visit allowed per day', 'Error', array(
+						'response' 	=> 403,
+						'back_link' => '/visit/',
+					));
+					return;
+				}
 			}
+			endwhile;
 		}
-		endwhile;
 
 		$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
 
