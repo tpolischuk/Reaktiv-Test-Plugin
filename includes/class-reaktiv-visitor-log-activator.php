@@ -31,14 +31,12 @@ class Reaktiv_Visitor_Log_Activator {
 
 		$employee_url = "https://gist.githubusercontent.com/jjeaton/21f04d41287119926eb4/raw/4121417bda0860f662d471d1d22b934a0af56eca/coworkers.json";
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_URL, $employee_url);
-		$result = curl_exec($ch);
-		curl_close($ch);
-		
-		$employee_data = json_decode($result);
+		$response = wp_remote_get( $employee_url );
+		if ( is_array( $response ) ) {
+			$body = $response['body'];
+		}
+
+		$employee_data = json_decode($body);
 
 		$visitable_employees = '';
 
