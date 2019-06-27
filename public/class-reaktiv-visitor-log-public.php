@@ -143,4 +143,18 @@ class Reaktiv_Visitor_Log_Public {
 
 	}
 
+	/**
+	* Overrides the default template path if we are usign the visitor form
+	*
+	* @since    1.0.0
+	*/
+	public function set_page_template_for_visitor_form() {
+		// Check if we are on the visit page
+		if( is_page('visit') ) {
+			// Override to the template defined in th e plugin
+			$template = WP_PLUGIN_DIR . '/reaktiv-visitor-log/public/partials/reaktiv-visitor-log-public-display.php';
+			return $template;
+		}
+	}
+
 }
