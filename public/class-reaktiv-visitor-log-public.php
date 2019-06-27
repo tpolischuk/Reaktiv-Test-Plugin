@@ -115,31 +115,33 @@ class Reaktiv_Visitor_Log_Public {
 		// Check if this persons name has been created in the past day
 		if(isset($_GET['guest'])) {
 			while ( $loop->have_posts() ) : $loop->the_post();
-			if (get_the_title() === $_GET['guest']) {
-				if (current_time('l F j Y') === get_the_date('l F j Y')) {
-					wp_die('Only one visit allowed per day', 'Error', array(
-						'response' 	=> 403,
-						'back_link' => '/visit/',
-					));
-					return;
-				}
+			if (get_the_title() === $_GET['guest'] && current_time('l F j Y') === get_the_date('l F j Y') ) {
+				apply_filter('reaktiv_visitor_log_failed_time_check', $_GET['guest']);
+				wp_die('Only one visit allowed per day', 'Error', array(
+					'response' 	=> 403,
+					'back_link' => '/visit/',
+				));
+				return;
 			}
 			endwhile;
 		}
 
-		$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
+	$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
 
-		// Create entry in the custom post type
-		$id = wp_insert_post(array(
-			'post_title'=> sanitize_text_field($_GET['guest']),
-			'post_type'=> 'visitor_log',
-			'post_status' => 'publish',
-			'post_content'=> $visitor_log_message
-		));
+	// Adding in a filter for other plugins to listen to
+	apply_filter('reaktiv_visitor_log_successful_registration', $visitor_log_message);
 
-		wp_reset_postdata();
+	// Create entry in the custom post type
+	$id = wp_insert_post(array(
+		'post_title'=> sanitize_text_field($_GET['guest']),
+		'post_type'=> 'visitor_log',
+		'post_status' => 'publish',
+		'post_content'=> $visitor_log_message
+	));
 
-		wp_redirect( home_url('/visit?success=yes') );
+	wp_reset_postdata();
+
+	wp_redirect( home_url('/visit?success=yes') );
 
 	}
 

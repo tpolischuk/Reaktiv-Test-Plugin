@@ -46,6 +46,7 @@ class Reaktiv_Visitor_Log_Activator {
 
 		dbDelta( $sql );
 
+		// Save DB version, if we need to do schema updates in the future
 		add_option( 'reaktiv_visitor_log_db_version', '1.0' );
 
 		// Retrieve the employee data from the remote JSON file
