@@ -13,6 +13,19 @@
 */
 
 get_header();
+
+global $wpdb;
+
+$table_name = "reaktiv_visitor_log_employees";
+
+$employee_data = $wpdb->get_results( "SELECT * FROM $table_name" );
+
+$visitable_employees = '';
+
+foreach ($employee_data as $employee) {
+	$visitable_employees .= '<option value="' . $employee->name .' - '. $employee->desk . '">'. $employee->name .' - '. $employee->desk . '</option>';
+}
+
 ?>
 
 <section id="primary" class="content-area">
@@ -25,9 +38,8 @@ get_header();
 
         <input type="email" required placeholder="Your E-mail" name="email" />
 
-        <h1>Put employee data here</h1>
         <select required name="host">
-
+          <?php echo $visitable_employees; ?>
         </select>
 
         <input type="hidden" name="action" value="visitor_login_form">
