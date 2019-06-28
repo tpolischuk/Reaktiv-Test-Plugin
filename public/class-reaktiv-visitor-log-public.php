@@ -100,30 +100,35 @@ class Reaktiv_Visitor_Log_Public {
 
 	}
 	/**
-	* Process the visitor form
+	* Process the visitor form, check if the visitor has registered in the past day,
+	* insert into Visitor Log custom post type, redirect upon success.
 	*
 	* @since    1.0.0
 	*/
 	public function process_visitor_login_form() {
 
-		// Query the custom post type to see if there is a record for the person
-		$loop = new WP_Query( array(
-			'post_type' => 'visitor_log',
-			's' => sanitize_text_field($_GET['guest'])
-		));
+		if (isset($_GET['guest'])) {
+			$today = getdate();
+			$args = array(
+				'post_type' => 'visitor_log',
+				'title' => sanitize_text_field($_GET['guest']),
+				'date_query' => array(
+					array(
+						'year'  => $today['year'],
+						'month' => $today['mon'],
+						'day'   => $today['mday'],
+					),
+				),
+			);
+			$loop = new WP_Query( $args );
 
-		// Check if this persons name has been created in the past day
-		if(isset($_GET['guest'])) {
 			while ( $loop->have_posts() ) : $loop->the_post();
-			if (get_the_title() === $_GET['guest']) {
-				if (current_time('l F j Y') === get_the_date('l F j Y')) {
-					wp_die('Only one visit allowed per day', 'Error', array(
-						'response' 	=> 403,
-						'back_link' => '/visit/',
-					));
-					return;
-				}
-			}
+				do_action('reaktiv_visitor_log_failed_time_check');
+				wp_die('Only one visit allowed per day', 'Error', array(
+					'response' 	=> 403,
+					'back_link' => '/visit/',
+				));
+				return;
 			endwhile;
 		}
 
@@ -134,13 +139,25 @@ class Reaktiv_Visitor_Log_Public {
 			'post_title'=> sanitize_text_field($_GET['guest']),
 			'post_type'=> 'visitor_log',
 			'post_status' => 'publish',
-			'post_content'=> $visitor_log_message
+			'post_content'=> apply_filters('reaktiv_visitor_log_successful_registration', $visitor_log_message)
 		));
 
 		wp_reset_postdata();
-
 		wp_redirect( home_url('/visit?success=yes') );
+	}
 
+	/**
+	* Overrides the default template path if we are usign the visitor form
+	*
+	* @since    1.0.0
+	*/
+	public function set_page_template_for_visitor_form() {
+		// Check if we are on the visit page
+		if( is_page('visit') ) {
+			// Override to the template defined in th e plugin
+			$template = WP_PLUGIN_DIR . '/reaktiv-visitor-log/public/partials/reaktiv-visitor-log-public-display.php';
+			return $template;
+		}
 	}
 
 }
