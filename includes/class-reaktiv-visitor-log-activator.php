@@ -55,17 +55,16 @@ class Reaktiv_Visitor_Log_Activator {
 		$response = wp_remote_get( $employee_url );
 		if ( is_array( $response ) ) {
 			$body = $response['body'];
+			$employee_data = json_decode($body);
+
+			//Insert the data into the custom table
+			foreach ($employee_data as $employee) {
+				$wpdb->insert("reaktiv_visitor_log_employees",array(
+					"name" => $employee->name,
+					"desk"=>$employee->desk
+				));
+			};
 		}
-
-		$employee_data = json_decode($body);
-
-		//Insert the data into the custom table
-		foreach ($employee_data as $employee) {
-			$wpdb->insert("reaktiv_visitor_log_employees",array(
-				"name" => $employee->name,
-				"desk"=>$employee->desk
-			));
-		};
 
 		$generated_visitor_page = array(
 			'post_title'    => wp_strip_all_tags( 'Visit' ),
