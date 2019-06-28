@@ -28,9 +28,11 @@ foreach ($employee_data as $employee) {
 
 ?>
 
-<section id="primary" class="content-area">
-  <main id="main" class="site-main">
 
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+
+	<div class="entry-content">
     <div class="form-container">
       <form id="visitor-login-form" action="<?php echo esc_url( admin_url('admin-post.php') ) ?>">
         <h3>Visitor Registration Form</h3>
@@ -46,9 +48,11 @@ foreach ($employee_data as $employee) {
         <input id="visitor-submit" type="submit" value="Submit" />
       </form>
     </div>
+  </div>
 
-    </main><!-- #main -->
-  </section><!-- #primary -->
+
+</article><!-- #post-<?php the_ID(); ?> -->
+
 
   <?php
   get_footer();
