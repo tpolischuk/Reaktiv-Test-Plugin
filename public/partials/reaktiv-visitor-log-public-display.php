@@ -23,16 +23,13 @@ $employee_data = $wpdb->get_results( "SELECT * FROM $table_name" );
 $visitable_employees = '';
 
 foreach ($employee_data as $employee) {
-	$visitable_employees .= '<option value="' . $employee->name .' - '. $employee->desk . '">'. $employee->name .' - '. $employee->desk . '</option>';
+  $visitable_employees .= '<option value="' . $employee->name .' - '. $employee->desk . '">'. $employee->name .' - '. $employee->desk . '</option>';
 }
 
 ?>
 
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-
-	<div class="entry-content">
+  <div class="entry-content">
     <div class="form-container">
       <form id="visitor-login-form" action="<?php echo esc_url( admin_url('admin-post.php') ) ?>">
         <h3>Visitor Registration Form</h3>
@@ -49,10 +46,7 @@ foreach ($employee_data as $employee) {
       </form>
     </div>
   </div>
-
-
 </article><!-- #post-<?php the_ID(); ?> -->
 
-
-  <?php
-  get_footer();
+<?php
+get_footer();

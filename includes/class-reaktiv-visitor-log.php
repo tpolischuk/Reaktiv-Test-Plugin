@@ -223,4 +223,4 @@ class Reaktiv_Visitor_Log {
 		return $this->version;
 	}
 
-	}
+}
