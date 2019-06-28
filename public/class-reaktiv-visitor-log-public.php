@@ -106,37 +106,39 @@ class Reaktiv_Visitor_Log_Public {
 	*/
 	public function process_visitor_login_form() {
 
-		// Query the custom post type to see if there is a record for the person
-		$loop = new WP_Query( array(
-			'post_type' => 'visitor_log',
-			's' => sanitize_text_field($_GET['guest'])
-		));
+		if (isset($_GET['guest'])) {
+			$today = getdate();
+			$args = array(
+				'post_type' => 'visitor_log',
+				's' => sanitize_text_field($_GET['guest']),
+				'date_query' => array(
+					array(
+						'year'  => $today['year'],
+						'month' => $today['mon'],
+						'day'   => $today['mday'],
+					),
+				),
+			);
+			$loop = new WP_Query( $args );
 
-		// Check if this persons name has been created in the past day
-		if(isset($_GET['guest'])) {
 			while ( $loop->have_posts() ) : $loop->the_post();
-			if (get_the_title() === $_GET['guest'] && current_time('l F j Y') === get_the_date('l F j Y') ) {
-				apply_filter('reaktiv_visitor_log_failed_time_check', $_GET['guest']);
+				do_action('reaktiv_visitor_log_failed_time_check');
 				wp_die('Only one visit allowed per day', 'Error', array(
 					'response' 	=> 403,
 					'back_link' => '/visit/',
 				));
 				return;
-			}
 			endwhile;
 		}
 
 	$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
-
-	// Adding in a filter for other plugins to listen to
-	apply_filter('reaktiv_visitor_log_successful_registration', $visitor_log_message);
 
 	// Create entry in the custom post type
 	$id = wp_insert_post(array(
 		'post_title'=> sanitize_text_field($_GET['guest']),
 		'post_type'=> 'visitor_log',
 		'post_status' => 'publish',
-		'post_content'=> $visitor_log_message
+		'post_content'=> apply_filters('reaktiv_visitor_log_successful_registration', $visitor_log_message)
 	));
 
 	wp_reset_postdata();
