@@ -100,7 +100,8 @@ class Reaktiv_Visitor_Log_Public {
 
 	}
 	/**
-	* Process the visitor form
+	* Process the visitor form, check if the visitor has registered in the past day,
+	* insert into Visitor Log custom post type, redirect upon success.
 	*
 	* @since    1.0.0
 	*/
@@ -131,20 +132,18 @@ class Reaktiv_Visitor_Log_Public {
 			endwhile;
 		}
 
-	$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
+		$visitor_log_message = 'Is visiting ' . sanitize_text_field($_GET['host']) . ' on ' . current_time('l, F j Y - H:i:s') . '.';
 
-	// Create entry in the custom post type
-	$id = wp_insert_post(array(
-		'post_title'=> sanitize_text_field($_GET['guest']),
-		'post_type'=> 'visitor_log',
-		'post_status' => 'publish',
-		'post_content'=> apply_filters('reaktiv_visitor_log_successful_registration', $visitor_log_message)
-	));
+		// Create entry in the custom post type
+		$id = wp_insert_post(array(
+			'post_title'=> sanitize_text_field($_GET['guest']),
+			'post_type'=> 'visitor_log',
+			'post_status' => 'publish',
+			'post_content'=> apply_filters('reaktiv_visitor_log_successful_registration', $visitor_log_message)
+		));
 
-	wp_reset_postdata();
-
-	wp_redirect( home_url('/visit?success=yes') );
-
+		wp_reset_postdata();
+		wp_redirect( home_url('/visit?success=yes') );
 	}
 
 	/**
