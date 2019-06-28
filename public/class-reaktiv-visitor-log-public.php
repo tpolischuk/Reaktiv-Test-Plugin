@@ -110,7 +110,7 @@ class Reaktiv_Visitor_Log_Public {
 			$today = getdate();
 			$args = array(
 				'post_type' => 'visitor_log',
-				's' => sanitize_text_field($_GET['guest']),
+				'title' => sanitize_text_field($_GET['guest']),
 				'date_query' => array(
 					array(
 						'year'  => $today['year'],
